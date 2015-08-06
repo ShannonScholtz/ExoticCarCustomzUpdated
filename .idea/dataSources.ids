@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - ExoticCarCustomz@localhost" uuid="5c69dc06-0168-4109-86d5-b02c846ac0b2">
+    <database-info product="MySQL" version="5.6.19-0ubuntu0.14.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.35 ( Revision: 5fb9c5849535c13917c2cf9baaece6ef9693ef27 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="ExoticCarCustomz"/>
+    <table name="car" schema="" catalog="ExoticCarCustomz" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="colour" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="make" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="model" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="serial_number" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="year" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_hjo5tc577n8n5yjijmyqel7pp" table="sales_invoice" schema="" catalog="ExoticCarCustomz" columns="car_id"/>
+      <exported-key name="FK_dijfbye1ylo0y09lwh936ppfp" table="service_sheet" schema="" catalog="ExoticCarCustomz" columns="car_id"/>
+    </table>
+    <table name="customer" schema="" catalog="ExoticCarCustomz" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="address" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="first_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="last_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="phone_number" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="postal_code" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_e24kbi3pwukueioj05xtd1f8w" table="sales_invoice" schema="" catalog="ExoticCarCustomz" columns="customer_id"/>
+      <exported-key name="FK_8dn7xmc8eh6cm2o5qrcek3246" table="service_sheet" schema="" catalog="ExoticCarCustomz" columns="customer_id"/>
+      <exported-key name="FK_710ou8yexbk97p57b3vfd4g67" table="storage" schema="" catalog="ExoticCarCustomz" columns="customer_id"/>
+    </table>
+    <table name="mechanic" schema="" catalog="ExoticCarCustomz" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="first_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="hours" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="last_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="mechanic_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="rate" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_etqiimci8641vcsstdgukh805" table="service_sheet" schema="" catalog="ExoticCarCustomz" columns="mechanic_id"/>
+    </table>
+    <table name="parts_used" schema="" catalog="ExoticCarCustomz" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="description" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="part_number" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="price" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="servicesheet_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_314ceel9ys8hmhltp1w3xshwu" columns="servicesheet_id" ref-table="service_sheet" ref-schema="" ref-catalog="ExoticCarCustomz" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_3dt4pak0yeo398gq4dboihuuk" table="service_sheet" schema="" catalog="ExoticCarCustomz" columns="parts_used_id"/>
+      <index name="FK_314ceel9ys8hmhltp1w3xshwu" unique="false" columns="servicesheet_id"/>
+    </table>
+    <table name="sales_invoice" schema="" catalog="ExoticCarCustomz" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="amount" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="date" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="salesperson_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="car_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="customer_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_e24kbi3pwukueioj05xtd1f8w" columns="customer_id" ref-table="customer" ref-schema="" ref-catalog="ExoticCarCustomz" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_aj9k9a1lr3pc8ysyxoljaerrt" columns="salesperson_id" ref-table="salesperson" ref-schema="" ref-catalog="ExoticCarCustomz" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_hjo5tc577n8n5yjijmyqel7pp" columns="car_id" ref-table="car" ref-schema="" ref-catalog="ExoticCarCustomz" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_aj9k9a1lr3pc8ysyxoljaerrt" unique="false" columns="salesperson_id"/>
+      <index name="FK_e24kbi3pwukueioj05xtd1f8w" unique="false" columns="customer_id"/>
+      <index name="FK_hjo5tc577n8n5yjijmyqel7pp" unique="false" columns="car_id"/>
+    </table>
+    <table name="salesperson" schema="" catalog="ExoticCarCustomz" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="daily_sales" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="first_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="hours" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="last_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="rate" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_aj9k9a1lr3pc8ysyxoljaerrt" table="sales_invoice" schema="" catalog="ExoticCarCustomz" columns="salesperson_id"/>
+    </table>
+    <table name="service_sheet" schema="" catalog="ExoticCarCustomz" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="period_worked_on" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="service_number" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="car_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="parts_used_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="customer_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="spraypainter_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="technician_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <column name="mechanic_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_etqiimci8641vcsstdgukh805" columns="mechanic_id" ref-table="mechanic" ref-schema="" ref-catalog="ExoticCarCustomz" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_1bxe4qomwnjd06q6wb3fh9b4x" columns="spraypainter_id" ref-table="spray_painter" ref-schema="" ref-catalog="ExoticCarCustomz" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_3dt4pak0yeo398gq4dboihuuk" columns="parts_used_id" ref-table="parts_used" ref-schema="" ref-catalog="ExoticCarCustomz" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_8dn7xmc8eh6cm2o5qrcek3246" columns="customer_id" ref-table="customer" ref-schema="" ref-catalog="ExoticCarCustomz" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_dijfbye1ylo0y09lwh936ppfp" columns="car_id" ref-table="car" ref-schema="" ref-catalog="ExoticCarCustomz" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="FK_qe6aj8xo3t2plc7lyq5185ljf" columns="technician_id" ref-table="technician" ref-schema="" ref-catalog="ExoticCarCustomz" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="FK_314ceel9ys8hmhltp1w3xshwu" table="parts_used" schema="" catalog="ExoticCarCustomz" columns="servicesheet_id"/>
+      <index name="FK_1bxe4qomwnjd06q6wb3fh9b4x" unique="false" columns="spraypainter_id"/>
+      <index name="FK_3dt4pak0yeo398gq4dboihuuk" unique="false" columns="parts_used_id"/>
+      <index name="FK_8dn7xmc8eh6cm2o5qrcek3246" unique="false" columns="customer_id"/>
+      <index name="FK_dijfbye1ylo0y09lwh936ppfp" unique="false" columns="car_id"/>
+      <index name="FK_etqiimci8641vcsstdgukh805" unique="false" columns="mechanic_id"/>
+      <index name="FK_qe6aj8xo3t2plc7lyq5185ljf" unique="false" columns="technician_id"/>
+    </table>
+    <table name="spray_painter" schema="" catalog="ExoticCarCustomz" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="painter_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="first_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="hours" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="last_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="rate" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_1bxe4qomwnjd06q6wb3fh9b4x" table="service_sheet" schema="" catalog="ExoticCarCustomz" columns="spraypainter_id"/>
+    </table>
+    <table name="storage" schema="" catalog="ExoticCarCustomz" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="colour" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="make" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="model" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="monthly_storage_cost" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="registration_number" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="storage_period_in_months" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="total_storage_cost" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="year" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="customer_id" sqlType="BIGINT" precision="19" scale="0" nullable="true" jdbcType="-5"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="FK_710ou8yexbk97p57b3vfd4g67" columns="customer_id" ref-table="customer" ref-schema="" ref-catalog="ExoticCarCustomz" ref-columns="id" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="FK_710ou8yexbk97p57b3vfd4g67" unique="false" columns="customer_id"/>
+    </table>
+    <table name="technician" schema="" catalog="ExoticCarCustomz" type="TABLE">
+      <column name="id" sqlType="BIGINT" precision="19" scale="0" nullable="false" jdbcType="-5" autoIncrement="true"/>
+      <column name="first_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="hours" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="last_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="rate" sqlType="DOUBLE" precision="22" scale="0" nullable="false" jdbcType="8"/>
+      <column name="sound_installs" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="FK_qe6aj8xo3t2plc7lyq5185ljf" table="service_sheet" schema="" catalog="ExoticCarCustomz" columns="technician_id"/>
+    </table>
+  </data-source>
+</component>
